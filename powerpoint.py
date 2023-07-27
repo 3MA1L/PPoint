@@ -1,6 +1,11 @@
 import os
 import datetime
+import collections
+import collections.abc
 from pptx import Presentation
+from pptx.chart.data import CategoryChartData
+from pptx.enum.chart import XL_CHART_TYPE
+from enum import Enum
 from pptx.util import Inches
 from comtypes.client import Constants, CreateObject
 
@@ -49,7 +54,10 @@ def save_powerpoint_as_pdf(prs, output_filename):
 
 def main():
     # Load the PowerPoint template
-    prs = Presentation('template.pptx')
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    template_filename = os.path.join(script_dir, "SecuritySlides.pptx")
+    
+    prs = Presentation(template_filename)
 
     # Slide 1: Ask for customer name and update the template
     customer_name = input("Enter Customer Name: ")
